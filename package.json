@@ -1,6 +1,6 @@
 {
   "name": "gunzip-stream",
-  "version": "1.0.0-dev",
+  "version": "1.0.0",
   "description": "Gunzip a stream if needed",
   "main": "index.js",
   "repository": "git@github.com:jdesboeufs/gunzip-stream.git",
