@@ -2,7 +2,7 @@
 
 > Gunzip a stream if needed
 
-`Transform` stream which acts as `zlib.Gunzip` if input is gzipped. Fallback to a simple `PassThrough` otherwise.
+`Transform` stream which acts as `zlib.Gunzip` if input is gzipped. Fallback otherwise to a simple `PassThrough` stream.
 
 ## Install
 
