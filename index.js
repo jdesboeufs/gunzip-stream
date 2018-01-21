@@ -13,6 +13,9 @@ class Gunzip extends Transform {
     this._internalTransformStream.on('data', chunk => {
       this.push(chunk)
     })
+    this._internalTransformStream.on('error', err => {
+      this.emit('error', err)
+    })
     this._internalTransformStream.on('end', () => {
       this._flushCb()
     })
