@@ -1,4 +1,4 @@
-# gunzip-stream ![npm version](https://img.shields.io/npm/v/gunzip-stream.svg)](https://www.npmjs.com/package/gunzip-stream) [![Build Status](https://travis-ci.org/jdesboeufs/gunzip-stream.svg?branch=master)](https://travis-ci.org/jdesboeufs/gunzip-stream)
+# gunzip-stream [![npm version](https://img.shields.io/npm/v/gunzip-stream.svg)](https://www.npmjs.com/package/gunzip-stream) [![Build Status](https://travis-ci.org/jdesboeufs/gunzip-stream.svg?branch=master)](https://travis-ci.org/jdesboeufs/gunzip-stream)
 
 > Gunzip a stream if needed
 
