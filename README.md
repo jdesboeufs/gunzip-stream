@@ -14,8 +14,8 @@ $ npm install gunzip-stream
 ## Usage
 
 ```js
-const fs = require('http');
-const {createGunzip} = require('gunzip-stream');
+const fs = require('fs');
+const {createGunzip} = require('gunzip-stream')
 
 fs.createReadStream('/path/to/file.gz.or.not')
   .pipe(createGunzip())
