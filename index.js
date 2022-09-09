@@ -15,7 +15,7 @@ function createGunzip() {
           ? new zlib.Gunzip()
           : new PassThrough()
 
-          internalTransformStream.on('data', chunk => {
+        internalTransformStream.on('data', chunk => {
           this.push(chunk)
         })
         internalTransformStream.on('error', error => {
