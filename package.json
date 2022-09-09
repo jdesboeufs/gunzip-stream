@@ -8,7 +8,8 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "test": "xo && ava"
+    "lint": "xo",
+    "test": "ava"
   },
   "dependencies": {
     "is-gzip": "^2.0.0"
