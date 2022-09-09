@@ -5,16 +5,15 @@ const zlib = require('zlib')
 const isGzip = require('is-gzip')
 
 class Gunzip extends Transform {
-
   _initInternalTransformStream(gunzip = false) {
-    this._internalTransformStream = gunzip ?
-      new zlib.Gunzip() :
-      new PassThrough()
+    this._internalTransformStream = gunzip
+      ? new zlib.Gunzip()
+      : new PassThrough()
     this._internalTransformStream.on('data', chunk => {
       this.push(chunk)
     })
-    this._internalTransformStream.on('error', err => {
-      this.emit('error', err)
+    this._internalTransformStream.on('error', error => {
+      this.emit('error', error)
     })
     this._internalTransformStream.on('end', () => {
       this._flushCb()
@@ -25,6 +24,7 @@ class Gunzip extends Transform {
     if (!this._internalTransformStream) {
       this._initInternalTransformStream(isGzip(chunk))
     }
+
     this._internalTransformStream.write(chunk)
     cb()
   }
