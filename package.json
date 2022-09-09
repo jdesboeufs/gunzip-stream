@@ -15,7 +15,7 @@
     "is-gzip": "^2.0.0"
   },
   "devDependencies": {
-    "ava": "^0.24.0",
+    "ava": "^4.3.3",
     "get-stream": "^3.0.0",
     "xo": "^0.52.3"
   },

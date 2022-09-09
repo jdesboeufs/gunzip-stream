@@ -12,10 +12,8 @@ test('gzipped stream', async t => {
 
 test('corrupted gzipped stream', async t => {
   const file = createReadStream(path.join(__dirname, 'fixtures', 'corrupted.txt.gz'))
-  await t.throws(
-    getStream(file.pipe(createGunzip())),
-    'incorrect data check'
-  )
+  const error = await t.throwsAsync(() => getStream(file.pipe(createGunzip())))
+  t.is(error.message, 'incorrect data check')
 })
 
 test('not gzipped stream', async t => {
