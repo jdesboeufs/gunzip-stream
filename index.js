@@ -4,43 +4,41 @@ const {Transform, PassThrough} = require('stream')
 const zlib = require('zlib')
 const isGzip = require('is-gzip')
 
-class Gunzip extends Transform {
-  _initInternalTransformStream(gunzip = false) {
-    this._internalTransformStream = gunzip
-      ? new zlib.Gunzip()
-      : new PassThrough()
-    this._internalTransformStream.on('data', chunk => {
-      this.push(chunk)
-    })
-    this._internalTransformStream.on('error', error => {
-      this.emit('error', error)
-    })
-    this._internalTransformStream.on('end', () => {
-      this._flushCb()
-    })
-  }
-
-  _transform(chunk, encoding, cb) {
-    if (!this._internalTransformStream) {
-      this._initInternalTransformStream(isGzip(chunk))
-    }
-
-    this._internalTransformStream.write(chunk)
-    cb()
-  }
-
-  _flush(cb) {
-    if (this._internalTransformStream) {
-      this._internalTransformStream.end()
-      this._flushCb = cb
-    } else {
-      cb()
-    }
-  }
-}
-
 function createGunzip() {
-  return new Gunzip()
+  let flushCb
+  let internalTransformStream
+
+  return new Transform({
+    transform(chunk, encoding, cb) {
+      if (!internalTransformStream) {
+        internalTransformStream = isGzip(chunk)
+          ? new zlib.Gunzip()
+          : new PassThrough()
+
+          internalTransformStream.on('data', chunk => {
+          this.push(chunk)
+        })
+        internalTransformStream.on('error', error => {
+          this.emit('error', error)
+        })
+        internalTransformStream.on('end', () => {
+          flushCb()
+        })
+      }
+
+      internalTransformStream.write(chunk)
+      cb()
+    },
+
+    flush(cb) {
+      if (internalTransformStream) {
+        internalTransformStream.end()
+        flushCb = cb
+      } else {
+        cb()
+      }
+    }
+  })
 }
 
 module.exports = {createGunzip}
